@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 
 from .config import settings
 from .models import OrderCreate
@@ -29,9 +29,22 @@ async def place_order(order: OrderCreate, db: DbSession):
     logging.info(f"Order placed\tOrder ID: {new_order.id}")
     
     return order
-    
 
-@router.get("/order_status/{order_id}")
-async def get_order_status(order_id: int):
-    pass
+
+@router.get("/orders/", response_model=list[OrderCreate])
+async def get_orders(db: DbSession):
+    orders = db.query(Order).all()
+    if not orders:
+        raise HTTPException(status_code=404, detail="Orders Not found")
+    return orders
+
+
+@router.get("/orders/{order_id}", response_model=OrderCreate)
+async def get_order_by_id(order_id: int, db: DbSession):
+    order = db.query(Order).filter(Order.id == order_id).first() # type: ignore
+    if not order:
+        raise HTTPException(status_code=404, detail=f"Order not found for ID {order_id}")
+    return order
+    
+    
 
