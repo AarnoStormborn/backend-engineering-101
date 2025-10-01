@@ -1,12 +1,10 @@
 from fastapi import APIRouter, HTTPException
 
-from .config import settings
 from .models import OrderCreate, OrderResponse
 from .tasks import confirm_order
 from .db.core import DbSession
 from .db.entities import Order
 
-import time
 import logging
 logging.basicConfig(level=logging.INFO)
 

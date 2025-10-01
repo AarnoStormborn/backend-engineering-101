@@ -14,7 +14,5 @@ class Settings(BaseSettings):
 
 settings = Settings() # type: ignore
 
-print(settings.REDIS_URL)
-
 broker_url = settings.REDIS_URL
 result_backend = settings.REDIS_URL
