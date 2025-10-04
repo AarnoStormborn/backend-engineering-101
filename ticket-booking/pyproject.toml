@@ -15,4 +15,5 @@ dependencies = [
     "psycopg2-binary",
     "flower",
     "loguru",
+    "alembic",
 ]
