@@ -1,6 +1,6 @@
-def main():
-    print("Hello from ticket-booking!")
+from fastapi import FastAPI
 
+from src.theaters.views import router as theater_router
 
-if __name__ == "__main__":
-    main()
+app = FastAPI()
+app.include_router(theater_router)
