@@ -33,13 +33,11 @@ async def get_theaters(db: DbSession) -> list[TheaterResponse]:
 async def get_theaters_by_id(theater_id: UUID, db: DbSession) -> TheaterResponse:
     try:
         theater = db.query(Theater).filter(Theater.id == theater_id).first()
-        logger.info(f"Found Theater for ID: {theater_id}")
         if not theater:
-            logger.warning(f"No theaters found for ID {theater_id}")
             raise HTTPException(status_code=404, detail=f"No theater for ID: {theater_id}")
+        logger.info(f"Found Theater for ID: {theater_id}")
         return theater
 
-        return theater
     except Exception as e:
         logger.error(f"Error listing theaters by ID: {theater_id}: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
