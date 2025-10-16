@@ -8,3 +8,7 @@ class TheaterResponse(BaseModel):
     name: str
 
     model_config = ConfigDict(from_attributes=True)
+
+
+class TheaterCreate(BaseModel):
+    name: str
