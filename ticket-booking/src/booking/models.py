@@ -1,7 +1,7 @@
 from datetime import datetime
 from uuid import UUID
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class BookingResponse(BaseModel):
@@ -10,6 +10,10 @@ class BookingResponse(BaseModel):
     seats_reserved: int
     booking_time: datetime
 
+    model_config = ConfigDict(from_attributes=True)
+
 
 class BookingCreation(BaseModel):
-    pass
+    show_id: UUID
+    seats_reserved: int
+    booking_time: datetime
