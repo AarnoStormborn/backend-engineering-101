@@ -1,11 +1,13 @@
 from fastapi import FastAPI
 
 from src.movies.views import router as movie_router
+from src.shows.views import router as shows_router
 from src.theaters.views import router as theater_router
 
 app = FastAPI()
 app.include_router(theater_router)
 app.include_router(movie_router)
+app.include_router(shows_router)
 
 
 # @app.on_event("startup")
